@@ -1,46 +1,60 @@
-"暂时先这样
-set nocompatible
+"NeoBundle Scripts-----------------------------
+if &compatible
+  set nocompatible               " Be iMproved
+endif
+
+" Required:
+set runtimepath+=/home/jeff/.vim/bundle/neobundle.vim/
+
+" Required:
+call neobundle#begin(expand('/home/jeff/.vim/bundle'))
+
+" Let NeoBundle manage NeoBundle
+" Required:
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+" Add or remove your Bundles here:
+NeoBundle 'Shougo/neosnippet.vim'
+NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'ctrlpvim/ctrlp.vim'
+NeoBundle 'flazz/vim-colorschemes'
+
+" You can specify revision/branch/tag.
+NeoBundle 'Shougo/vimshell', { 'rev' : '3787e5' }
+
+NeoBundle 'davidhalter/jedi-vim'
+
+" Do not load vim-pyenv until *.py is opened and
+" make sure that it is loaded after jedi-vim is loaded.
+NeoBundleLazy 'lambdalisue/vim-pyenv', {
+        \ 'depends': ['davidhalter/jedi-vim'],
+        \ 'autoload': {
+        \   'filetypes': ['python', 'python3'],
+        \ }}
+
+NeoBundle 'vim-flake8'
+
+NeoBundle 'jiangmiao/auto-pairs'
+
+NeoBundle 'bsdelf/bufferhint'
+nnoremap - :call bufferhint#Popup()<CR>
+
+" Required:
+call neobundle#end()
+
+" Required:
+filetype plugin indent on
+
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
+"End NeoBundle Scripts-------------------------
+
 
 set nu
-
-set ts=4
-set sts=4
-set sw=4
-set expandtab
-
-"set smartindent
-"set cindent
-set autoindent
-
-"set cursorline
-"set cursorcolumn
-
+set cc=80
 set hlsearch
 set incsearch
 
-syntax enable
-syntax on
-
-set ignorecase smartcase
-
-set encoding=utf-8
-set termencoding=utf-8
-
-inoremap ( ()<LEFT>
-inoremap " ""<LEFT>
-inoremap ' ''<LEFT>
-inoremap [ []<LEFT>
-inoremap { {}<LEFT><CR><CR><UP><TAB>
-
-function! ClosePair(cchar)
-    if getline('.')[col('.')-1] == a:cchar
-        return "\<RIGHT>"
-    else
-        return a:cchar
-    endif
-endf
-
-inoremap <expr> ) ClosePair(")")
-inoremap <expr> ] ClosePair("]")
-inoremap <expr> } ClosePair("}")
-
+colorscheme solarized
